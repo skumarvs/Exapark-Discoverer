@@ -1,0 +1,8 @@
+D:\Builder\workspace\Exapark\ServerDiscoverer\installer-win\bin\Debug\Exapark_EDS_v1_2.win.msi
+D:\Builder\workspace\Exapark\ServerDiscoverer\installer-win\bin\Debug\Exapark_EDS_v1_2.win.wixpdb
+obj\Debug\KeysDlg.wixobj
+obj\Debug\Product.wixobj
+obj\Debug\RegionDlg.wixobj
+obj\Debug\Exapark Installer.wixproj.BindContentsFileListnull.txt
+obj\Debug\Exapark Installer.wixproj.BindOutputsFileListnull.txt
+obj\Debug\Exapark Installer.wixproj.BindBuiltOutputsFileListnull.txt

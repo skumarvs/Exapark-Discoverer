@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+	<Product Id="C34AF9EF-B32D-4D70-BD50-39F7ADF9B9C0" Name="Exapark Services" Language="1033" Version="1.0.0.0" Manufacturer="Exapark" UpgradeCode="33009FED-4309-42C8-AF00-570DD448EE68">
+		<Package Description="Exapart Installer package" Manufacturer="Exapark" InstallerVersion="200" Compressed="yes" />
+
+    <UI Id="WixUI_Exapark">
+      <UIRef Id="WixUI_Mondo" />
+      <UIRef Id="WixUI_ErrorProgressText" />
+      <DialogRef Id="AmazonKeysDlg" />
+      <DialogRef Id="RegionDlg" />
+
+      <Publish Dialog="LicenseAgreementDlg" Control="Next" Event="NewDialog" Value="AmazonKeysDlg" Order="3">LicenseAccepted = "1"</Publish>
+      <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="RegionDlg">1</Publish>
+    </UI>
+
+    <PropertyRef Id="NETFRAMEWORK20"/>
+    <Property Id="PUBLICKEY" Hidden="yes"></Property>
+    <Property Id="SECRETKEY" Hidden="yes"></Property>
+    <Property Id="ZONENAME" Hidden="yes"></Property>
+
+    <WixVariable Id="WixUIDialogBmp" Value="images\UIDialog.bmp" />
+    <WixVariable Id="WixUIBannerBmp" Value="images\UIBanner.bmp" />
+
+    <Media Id="1" Cabinet="exapark.cab" EmbedCab="yes" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+        <Directory Id="Exapark" Name="Exapark">
+          <Directory Id="INSTALLLOCATION" Name="Discoverer">
+            <Component Id="Exapark_Server_Discoverer" Guid="E3A53630-0D33-40C0-B971-B7DF7B7D7935">
+              <File Id='Exapark_Server_Discoverer_exe' Name='Exapark Server Discoverer.exe' DiskId='1' Source='Distr\Exapark Server Discoverer.exe' KeyPath='yes' Vital='yes' />
+              <File Id='Exapark_Server_Discoverer_exe_config' Name='Exapark Server Discoverer.exe.config' DiskId='1' Source='Distr\Exapark Server Discoverer.exe.config' KeyPath='no' Vital='yes' />
+
+              <util:XmlFile Id='XmlSettings1' File='[INSTALLLOCATION]\Exapark Server Discoverer.exe.config'
+                Action='setValue' Name='value' Value='[PUBLICKEY]' ElementPath="//configuration/appSettings/add[\[]@key='AWSAccessKey'[\]]" Sequence='1' />
+              <util:XmlFile Id='XmlSettings2' File='[INSTALLLOCATION]\Exapark Server Discoverer.exe.config'
+                Action='setValue' Name='value' Value='[SECRETKEY]' ElementPath="//configuration/appSettings/add[\[]@key='AWSSecretKey'[\]]" Sequence='2' />
+              <util:XmlFile Id='XmlSettings3' File='[INSTALLLOCATION]\Exapark Server Discoverer.exe.config'
+                Action='setValue' Name='value' Value='http://[ZONENAME]' ElementPath="//configuration/appSettings/add[\[]@key='AWSServiceURL'[\]]" Sequence='3' />
+
+              <ServiceInstall
+              Id="ServiceInstaller"
+              Type="ownProcess"
+              Vital="yes"
+              Start="auto"
+              Name="Exapark Server Discoverer"
+              Account="LocalSystem"
+              ErrorControl="ignore"
+              Interactive="no"
+              >
+              </ServiceInstall>
+              <ServiceControl Id="StartService" Start="install" Stop="both" Remove="uninstall" Name="Exapark Server Discoverer" Wait="no" />
+              
+            </Component>
+            <Component Id='Amazon_api' Guid='62178CE4-C5A8-439C-B5FC-39B32031EDB1'>
+              <File Id='AWSSDK_dll' Name='AWSSDK.dll' DiskId='1' Source='Distr\AWSSDK.dll' KeyPath='no' Vital='yes'/>
+            </Component>
+          </Directory>
+				</Directory>
+			</Directory>
+		</Directory>
+
+		<Feature Id="ServerDiscovererFeature" Title="Exapark Server Discoverer" Level="1">
+      <ComponentRef Id="Amazon_api" />
+      <ComponentRef Id="Exapark_Server_Discoverer" />
+    </Feature>
+
+    <Condition Message="You need to be an administrator to install this product.">
+      Privileged
+    </Condition>
+
+    <Condition Message='OS Windows XP or higher is required'><![CDATA[Installed OR VersionNT >= 501]]></Condition>
+
+    <Condition Message="This application requires .NET Framework 2.0. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR NETFRAMEWORK20]]>
+    </Condition>
+
+    <CustomAction Id="LaunchBrowser" Directory="INSTALLLOCATION" ExeCommand='[SystemFolder]cmd.exe /C start http://www.exapark.com/EDS/welcome_win.html' Return="asyncNoWait" />
+    
+    <InstallExecuteSequence>
+      <Custom Action='LaunchBrowser' After='InstallFinalize'>NOT Installed</Custom>
+    </InstallExecuteSequence>
+    
+	</Product>
+</Wix>

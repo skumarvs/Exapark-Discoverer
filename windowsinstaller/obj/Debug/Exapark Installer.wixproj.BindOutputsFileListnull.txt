@@ -1,0 +1,2 @@
+D:\Builder\workspace\Exapark\ServerDiscoverer\installer-win\bin\Debug\Exapark_EDS_v1_2.win.msi
+D:\Builder\workspace\Exapark\ServerDiscoverer\installer-win\bin\Debug\Exapark_EDS_v1_2.win.wixpdb

@@ -1,0 +1,3 @@
+Distr\AWSSDK.dll
+Distr\Exapark Server Discoverer.exe
+Distr\Exapark Server Discoverer.exe.config

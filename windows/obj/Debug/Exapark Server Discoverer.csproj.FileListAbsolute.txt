@@ -1,0 +1,11 @@
+D:\Builder\workspace\Exapark\ServerDiscoverer\win\bin\Debug\AWSSDK.dll
+D:\Builder\workspace\Exapark\ServerDiscoverer\win\bin\Debug\Exapark Server Discoverer.exe.config
+D:\Builder\workspace\Exapark\ServerDiscoverer\win\bin\Debug\Exapark Server Discoverer.exe
+D:\Builder\workspace\Exapark\ServerDiscoverer\win\bin\Debug\Exapark Server Discoverer.pdb
+D:\Builder\workspace\Exapark\ServerDiscoverer\win\bin\Debug\Exapark Server Discoverer.exe.CodeAnalysisLog.xml
+D:\Builder\workspace\Exapark\ServerDiscoverer\win\bin\Debug\Exapark Server Discoverer.exe.lastcodeanalysissucceeded
+D:\Builder\workspace\Exapark\ServerDiscoverer\win\obj\Debug\Exapark Server Discoverer.csprojResolveAssemblyReference.cache
+D:\Builder\workspace\Exapark\ServerDiscoverer\win\obj\Debug\com.exapark.tools.cloud.ProjectInstaller.resources
+D:\Builder\workspace\Exapark\ServerDiscoverer\win\obj\Debug\Exapark Server Discoverer.csproj.GenerateResource.Cache
+D:\Builder\workspace\Exapark\ServerDiscoverer\win\obj\Debug\Exapark Server Discoverer.exe
+D:\Builder\workspace\Exapark\ServerDiscoverer\win\obj\Debug\Exapark Server Discoverer.pdb
