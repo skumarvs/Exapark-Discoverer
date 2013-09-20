@@ -26,4 +26,4 @@ knows eachother and communicate. And eliminates the necessity of ipaddress of al
 By this way we form a cluster among the instances and nodes are discovered for the cluster
 
 
-Also the linux scripts is updated as a service to start/stop and to get the status 
+Also the linux scripts is updated as a service to start/stop and to get the status.
