@@ -1,0 +1,48 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+//manifest.mainAttributes("Main-Class" : "com.exapark.tools.cloud.Program")
+version = '1.2'
+sourceCompatibility = 1.6
+
+project.ext.mainClassName = "com.exapark.tools.cloud.Program"
+project.ext.title = 'Exapark Server Discoverer'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+	compile 'org.apache.httpcomponents:httpcore:4.1.2'
+	compile 'org.apache.httpcomponents:httpclient:4.1.2'
+	compile 'commons-logging:commons-logging:1.1.1'
+	compile 'commons-lang:commons-lang:2.6'
+	compile 'commons-codec:commons-codec:1.4'
+	compile 'com.amazonaws:aws-java-sdk:1.3.21'
+	compile 'com.google.inject:guice:3.0'
+}
+
+jar { 
+    manifest {
+	def manifestClasspath = configurations.runtime.collect { "lib/"+it.getName() }.join(' ') 
+        attributes 'Implementation-Title': title, 
+				   'Implementation-Version': version,
+				   'Main-Class': mainClassName,
+				   'Class-Path': manifestClasspath
+    }
+} 
+ 
+task('dist', type: Tar) {     
+    compression = Compression.GZIP 
+    archiveName = "Exapark_EDS_v1_2.linux.tar.gz"
+    dependsOn 'jar'
+    from jar.archivePath 
+    from ('scripts') {
+        include '**/*.sh'
+    }
+
+    into('lib'){
+    	from configurations.runtime
+    }
+}
+
