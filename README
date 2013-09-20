@@ -1,0 +1,29 @@
+Forked Version  of Exapark Service Discoverer
+
+Instances are tagged by a tag named Group (Group=Cluster1).With customized version of Open source Exapark Server
+Discoverer; the instance which runs the exapark discover service gets the tag group value of the current instance and  
+get the privates ips of only the running instances that belongs to the same group value and automatically registers any
+changes in hosts file
+
+
+instance          Tag
+jenkins-windows  Group - Cluster1
+hpalm            Group - Cluster1
+teamforge        Group - Cluster1
+subversion       Group - Cluster2
+scrumworkspro    
+
+#Exapark managed section
+172.31.2.171       jenkins-windows
+172.12.6.89        hpalm
+172.12.7.90        teamforge
+#Exapark managed section
+
+Benefits:
+Not all the running ec2 instances private ip addresses are updated to the host file. Only instances belong to the group
+knows eachother and communicate. And eliminates the necessity of ipaddress of all  the running instances.
+
+By this way we form a cluster among the instances and nodes are discovered for the cluster
+
+
+Also the linux scripts is updated as a service to start/stop and to get the status 
